@@ -25,7 +25,7 @@ import static modelo.conexion.server;
 public class LogicaDeNegocio {
     
     
-    private Connection con;
+    private static Connection con;
  
     public LogicaDeNegocio() {
         con = conexion.establecerConexionSQL();
@@ -47,6 +47,7 @@ public class LogicaDeNegocio {
         return b;
     }
 
+        
     
     /**
      * Metodo que llama a otro metodo con el fin de validar si existe un chofer en la base de datos. 
@@ -112,6 +113,12 @@ public class LogicaDeNegocio {
         return b;
     }
     
+      public static String contraseña(String cedula) throws ClassNotFoundException{
+
+          String papito =chofer.password(con, cedula);
+          System.out.println(papito);
+          return papito;
+      }
     /**
     * Metodo que realiza la consulta en la base de datos para diferenciar el tipo de usurio que ingresa.
     */

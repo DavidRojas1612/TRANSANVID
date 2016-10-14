@@ -26,6 +26,7 @@ public class chofer {
     public String Apellido1;
     public String Apellido2;
     public String celular;
+    public String contraseña;
     static Scanner teclado = new Scanner(System.in);
     private Connection con;
     
@@ -47,6 +48,28 @@ public class chofer {
         return rs;
     }
     
+     public static String password(Connection con, String user) throws ClassNotFoundException
+     {
+         ResultSet rs;
+         Statement st;
+         try
+            {          
+             chofer chf = new chofer();
+             st = con.createStatement();
+             String sqlconsult = "SELECT LCONTRASENA FROM LOGIN WHERE LCEDULA = '"+user+"';";
+             rs = st.executeQuery(sqlconsult);
+             while (rs.next()) {
+             
+             chf.setContraseña(rs.getString(1));
+             }
+             user=chf.getContraseña();
+             
+         }catch (SQLException ex)
+         {
+             System.out.println("Error" + ex);
+         }
+         return user;
+     }
     
      // metodo que se encarga de solicitar la informacion para insertar un conductor ó chofer
     public void InsertDriver()
@@ -110,7 +133,9 @@ public class chofer {
         }
     }
     
-   /**
+
+
+    /**
     * Metodo que inserta un nuevo usuario con una contraseña en la tabla login. 
     */
      public void insertarchlg(String cedula, String contrasena) {
@@ -280,5 +305,15 @@ public class chofer {
     public void setCelular(String celular) {
         this.celular = celular;
     }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+    
+    
 
 }

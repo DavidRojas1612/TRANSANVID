@@ -5,13 +5,16 @@
  */
 package modelo;
 
+
 import clases.buses;
 import clases.chofer;
 import clases.viajes;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.tools.JavaCompiler;
 
 /**
  *
@@ -28,7 +31,7 @@ public class maincho {
   static Scanner teclado = new Scanner(System.in);
 
     public maincho() {
-      
+   
      }
    
 
@@ -40,6 +43,8 @@ public class maincho {
     */
     public static void validar() throws ClassNotFoundException, SQLException
     {
+        LogicaDeNegocio ln = new LogicaDeNegocio();
+        
             System.out.println("Digite s para Salir");
             System.out.print("Debe Ingresar un usuario: ");
             usuario = teclado.nextLine();
@@ -47,15 +52,24 @@ public class maincho {
         {
             System.exit(0);
         }
+             System.out.println("Presione g si ha olvidado su contraseña");
             System.out.print("Debe Ingresar una clave: ");
+            
             contraseña = teclado.nextLine();
                if(contraseña.equals("s"))
         {
             System.exit(0);
         }
+               if(contraseña.equals("g"))
+               {
+                String pp=LogicaDeNegocio.contraseña(usuario);
+                 
+                   System.out.println("contraseña: "+pp);
+
+               }
        
             
-        LogicaDeNegocio ln = new LogicaDeNegocio();
+        
         if (!ln.validarUsuario(usuario, contraseña)) {
             System.out.println("Usuaio o clave no valida");
             System.out.println("");
@@ -155,9 +169,10 @@ public class maincho {
     /**
      * Main del proyecto.
      */
-    public static void main(String[] args) throws ClassNotFoundException, SQLException { 
-    
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException { 
+  
         validar();
+      
     }  
     }
         
