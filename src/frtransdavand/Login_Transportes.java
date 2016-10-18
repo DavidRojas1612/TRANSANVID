@@ -5,6 +5,7 @@
  */
 package frtransdavand;
 
+import SERVIDOR.servidorTCP;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,8 @@ import modelo.LogicaDeNegocio;
 public class Login_Transportes extends javax.swing.JFrame {
 
    public static String cc;
+     static Thread servidor = new servidorTCP("servidorTCP");
+    private String[] args;
     /**
      * Creates new form Login_Transportes
      */
@@ -139,13 +142,14 @@ public class Login_Transportes extends javax.swing.JFrame {
     }//GEN-LAST:event_BsalirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
        try {
-           frtransdavand.clienteTCP cliente = new frtransdavand.clienteTCP();
-            cliente.setVisible(true);
-        this.setVisible(false);
+           frtransdavand.clienteTCP.main(args);
        } catch (IOException ex) {
            Logger.getLogger(Login_Transportes.class.getName()).log(Level.SEVERE, null, ex);
        }
+      
+       
         
        
       
@@ -195,7 +199,7 @@ public class Login_Transportes extends javax.swing.JFrame {
 
     
     public static void main(String args[]) {
-        
+        servidor.start();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

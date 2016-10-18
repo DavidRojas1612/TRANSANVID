@@ -4,8 +4,10 @@ package SERVIDOR;
 import java.io.*;
 import modelo.LogicaDeNegocio;
 import clases.chofer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class servidorTCP {
+public class servidorTCP extends Thread{
 static ServerSocket ss;
 static Socket s;
 static DataOutputStream sa;
@@ -13,7 +15,11 @@ static DataInputStream entrada;
 
 
 
-public static void escuchar() throws IOException{
+    public servidorTCP(String msg) {
+        super (msg);
+    }
+
+public static void escuchar() throws IOException {
     System.out.println("..Esperando cliente...");
     s=ss.accept();
     System.out.println("..conectado - "+s.getInetAddress()+s.getPort());
@@ -46,9 +52,14 @@ public static void recibir() throws IOException{
         sa.writeUTF(dato);
     }//enviar
         
-public static void main(String[] arg) throws IOException {
-ss = new ServerSocket(12345,30000);
-escuchar();
+public void run(){
+    try {
+        ss = new ServerSocket(12345,30000);
+        escuchar();
+    } //main
+    catch (IOException ex) {
+        Logger.getLogger(servidorTCP.class.getName()).log(Level.SEVERE, null, ex);
+    }
 
-}//main
+}
 }//clase
