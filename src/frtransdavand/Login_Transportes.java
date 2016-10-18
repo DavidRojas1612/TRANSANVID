@@ -145,6 +145,7 @@ public class Login_Transportes extends javax.swing.JFrame {
       
        try {
            frtransdavand.clienteTCP.main(args);
+           this.setVisible(false);
        } catch (IOException ex) {
            Logger.getLogger(Login_Transportes.class.getName()).log(Level.SEVERE, null, ex);
        }
