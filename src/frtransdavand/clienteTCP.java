@@ -5,7 +5,7 @@
  */
 package frtransdavand;
 
-import SERVIDOR.servidorTCP;
+import clases.servidorTCP;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

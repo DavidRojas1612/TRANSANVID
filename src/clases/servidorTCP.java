@@ -1,4 +1,4 @@
-package SERVIDOR;
+package clases;
 
  import java.net.*;
 import java.io.*;
